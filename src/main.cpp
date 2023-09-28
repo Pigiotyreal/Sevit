@@ -20,14 +20,16 @@ int main(int argc, char* argv[]) {
     while (std::getline(file, line)) {
         text += line + "\n";
     }
-    
+
     file.close();
 
     Lexer lexer(text);
     std::vector<Token> tokens = lexer.lex();
 
     for (Token token : tokens) {
-        std::cout << token.value << std::endl;
+        if (token.type != TokenType::END_OF_FILE) {
+            std::cout << token.value << std::endl;
+        }
     }
 
     std::cout << "Compiling " << argv[1] << "...\n";
