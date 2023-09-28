@@ -6,18 +6,18 @@ BIN_DIR := bin
 
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%.o,$(SRCS))
-EXES := $(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%,$(SRCS))
+EXE := $(BIN_DIR)/sevc
 
-all: $(EXES)
+all: $(EXE)
 
-$(BIN_DIR)/%: $(BIN_DIR)/%.o
-	$(CXX) $< -o $@
+$(EXE): $(OBJS)
+	$(CXX) $^ -o $@
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) -I$(INC_DIR) -c $< -o $@
 
-run: $(EXES)
-	$(EXES)
+run: $(EXE)
+	$(EXE)
 
 clean:
-	rm -f $(OBJS) $(EXES)
+	rm -f $(OBJS) $(EXE)

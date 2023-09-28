@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <fstream>
+#include "lexer.h"
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -15,6 +13,21 @@ int main(int argc, char* argv[]) {
     if (!file.good()) {
         std::cerr << "ERR: File does not exist!" << std::endl;
         return 1;
+    }
+
+    std::string text;
+    std::string line;
+    while (std::getline(file, line)) {
+        text += line + "\n";
+    }
+    
+    file.close();
+
+    Lexer lexer(text);
+    std::vector<Token> tokens = lexer.lex();
+
+    for (Token token : tokens) {
+        std::cout << token.value << std::endl;
     }
 
     std::cout << "Compiling " << argv[1] << "...\n";
