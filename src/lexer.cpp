@@ -71,6 +71,11 @@ Token Lexer::get_next_token() {
             return Token(TokenType::RPAREN, ")");
         }
 
+        if (this->current_char == '^') {
+            this->advance();
+            return Token(TokenType::POW, "^");
+        }
+
         std::cerr << "ERR: Invalid character '" << this->current_char << "'!" << std::endl;
         exit(1);
     }

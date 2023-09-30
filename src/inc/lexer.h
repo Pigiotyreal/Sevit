@@ -14,6 +14,7 @@ enum class TokenType {
     DIVIDE,
     LPAREN,
     RPAREN,
+    POW,
     END_OF_FILE
 };
 
@@ -34,8 +35,8 @@ class Lexer {
         void advance();
         void skip_whitespace();
         int integer();
-        Token get_next_token();
     public:
+        Token get_next_token();
         Lexer(std::string text);
         std::vector<Token> lex();
 };
